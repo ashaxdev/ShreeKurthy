@@ -5,7 +5,7 @@ import { getUserFromRequest } from '@/lib/jwt'
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const user = getUserFromRequest(req)
+    const user = await getUserFromRequest(req)
     if (!user) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 })
     await connectDB()
 
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const user = getUserFromRequest(req)
+    const user = await getUserFromRequest(req)
     if (!user) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 })
     await connectDB()
 
