@@ -30,12 +30,19 @@ export async function verifyToken(
       JWT_SECRET
     )
 
-    return payload as JWTPayload
+    if (
+      typeof payload.userId !== 'string' ||
+      typeof payload.email !== 'string' ||
+      (payload.role !== 'user' && payload.role !== 'admin')
+    ) {
+      return null
+    }
+
+    return payload as unknown as JWTPayload
   } catch {
     return null
   }
 }
-
 export function getTokenFromRequest(
   req: NextRequest
 ): string | null {
