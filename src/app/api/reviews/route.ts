@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = getUserFromRequest(req)
+    const user = await getUserFromRequest(req)
     if (!user) return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 })
     await connectDB()
 
